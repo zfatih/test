@@ -1,6 +1,6 @@
 import React, {Component } from 'react'
 import {Link} from 'react-router-dom'
-import '../stil.css'
+import LoadingSpiner from './LoadingSpinner.js'
 
 class Lige extends Component{
     constructor(){
@@ -27,18 +27,27 @@ class Lige extends Component{
             })
       }
     render(){
-        
         return (
             <div className="Lige">
                 <div className="container">
-                    <h1>Odaberite ligu:</h1>
-                <div className="collection">
-                    {this.state.lige.map((jednaLiga) => {
-                        return (
-                            <Link to={"/Lige/"+jednaLiga.league_id} className="collection-item" key={jednaLiga.league_id}>{jednaLiga.league_name}</Link>
-                        )}
-                    )}
-                </div>
+                    <br></br>
+                    <br></br>
+                <h5 className="header col s12 light">Odaberite ligu:</h5>
+                <br></br>
+                    {
+                        this.state.lige.length===0 ? (<div className="center"><LoadingSpiner/></div>) :
+                        (
+                            <div className="collection">
+                            {
+                                this.state.lige.map((jednaLiga) => {
+                            return (
+                                <Link to={"/Lige/"+jednaLiga.league_id} className="collection-item" key={jednaLiga.league_id}>{jednaLiga.league_name}</Link>
+                            )
+                            })
+                            }
+                        </div>
+                        )
+                    }
                 </div>
             </div>
         )

@@ -4,7 +4,10 @@ class About extends Component{
     render(){
         return (
             <div className="About">
-                <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nihil corporis officiis voluptatem vel praesentium placeat in, quaerat adipisci cupiditate officia error itaque! Tempora doloremque nam qui nobis, veniam pariatur sit!</p>
+                <br></br>
+                <h5 className="header col s12 light center">Random naslov</h5>
+                <br></br>
+                <p className="center">Random paragraf</p>
             </div>
         )
     }

@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import '../stil.css';
+import LoadingSpiner from './LoadingSpinner.js'
 
 class Tim extends Component{
     constructor(){
@@ -29,34 +29,55 @@ class Tim extends Component{
     render (){
         return (
             <div className="Tim">
+                {
+                        this.state.mecevi.length===0 ? (<div className="center"><br></br><br></br><LoadingSpiner/></div>) :
+                        (
+                       
+
                 <div className="container">
+                    <br></br>
+                    <h5 className="header col s12 light">Zadnjih 5 utakmica tima {this.props.match.params.team_name}:</h5>
+                    <br></br>
             <table>
                     <thead>
-                        <tr>
-                            <th></th>
-                            <th></th>
-                            <th></th>
-                            <th></th>
-                            <th></th>
-                            <th></th>
-                        </tr>
+                        
                     </thead>
                     <tbody>
                         {
-                            this.state.mecevi.map((mec) => { return (
+                            this.state.mecevi.map((mec) => { 
+                                let style= {
+                                    fontWeight: 'normal'
+                                }
+                                let style1 = {
+                                    fontWeight: 'normal'
+                                };
+                                let style2 = {
+                                    fontWeight: 'bold'
+                                };
+                                if(this.props.match.params.team_name === mec.match_hometeam_name){
+                                    style1.fontWeight='bold';
+                                    style2.fontWeight='normal';
+                                } else {
+                                    style2.fontWeight='bold';
+                                    style1.fontWeight='normal';
+                                }
+                                return (
                                 <tr key={mec.match_id}>
-                                    <th>{mec.match_date}</th>
-                                    <th>{mec.league_name}</th>
-                                    <th>{mec.match_hometeam_name}</th>
-                                    <th>{mec.match_hometeam_score}</th>
-                                    <th>{mec.match_awayteam_score}</th>
-                                    <th>{mec.match_awayteam_name}</th>
+                                    <th style={style}>{mec.match_date}</th>
+                                    <th style={style}>{mec.league_name}</th>
+                                    <th style={style1}>{mec.match_hometeam_name}</th>
+                                    <th style={style}>{mec.match_hometeam_score}</th>
+                                    <th style={style}>{mec.match_awayteam_score}</th>
+                                    <th style={style2}>{mec.match_awayteam_name}</th>
                                 </tr>
                             )})
                         }
                     </tbody>
                 </table>
                 </div>
+                     
+                )
+                }
             </div>
         )
     }

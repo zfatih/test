@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import {Link} from 'react-router-dom'
-
+import LoadingSpiner from './LoadingSpinner.js'
 
 class Liga extends Component{
     constructor(){
@@ -27,40 +27,55 @@ class Liga extends Component{
     render (){
         return (
             <div className="Liga">
-                <div className="container">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th></th>
-                                <th>Tim</th>
-                                <th>MP</th>
-                                <th>W</th>
-                                <th>D</th>
-                                <th>L</th>
-                                <th>GF</th>
-                                <th>GA</th>
-                                <th>Pts</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {
-                                this.state.timovi.map((tim) => { return (
-                                    <tr key={tim.team_name}>
-                                        <th>{tim.overall_league_position}</th>
-                                        <th><Link to={"/Timovi/" +tim.team_name}>{tim.team_name}</Link></th>
-                                        <th>{tim.overall_league_payed}</th>
-                                        <th>{tim.overall_league_W}</th>
-                                        <th>{tim.overall_league_D}</th>
-                                        <th>{tim.overall_league_L}</th>
-                                        <th>{tim.overall_league_GF}</th>
-                                        <th>{tim.overall_league_GA}</th>
-                                        <th>{tim.overall_league_PTS}</th>
+                {
+                    this.state.timovi.length===0 ? (
+                        <div className="center">
+                            <br></br>
+                            <br></br>
+                        <LoadingSpiner/></div>
+                    ) :
+                    (
+                        <div className="container">
+                            <br></br>
+                            <h5 className="header col s12 light">Stanje na tabeli (kliknite na naziv tima za zadnjih 5 utakmica):</h5>
+                            <br></br>
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th></th>
+                                        <th>Tim</th>
+                                        <th>MP</th>
+                                        <th>W</th>
+                                        <th>D</th>
+                                        <th>L</th>
+                                        <th>GF</th>
+                                        <th>GA</th>
+                                        <th>Pts</th>
                                     </tr>
-                                )})
-                            }
-                        </tbody>
-                    </table>
-                </div>
+                                </thead>
+                                <tbody>
+                                    {
+                                        this.state.timovi.map((tim) => { return (
+                                            <tr key={tim.team_name}>
+                                                <th>{tim.overall_league_position}</th>
+                                                <th><Link to={"/Timovi/" +tim.team_name}>{tim.team_name}</Link></th>
+                                                <th>{tim.overall_league_payed}</th>
+                                                <th>{tim.overall_league_W}</th>
+                                                <th>{tim.overall_league_D}</th>
+                                                <th>{tim.overall_league_L}</th>
+                                                <th>{tim.overall_league_GF}</th>
+                                                <th>{tim.overall_league_GA}</th>
+                                                <th>{tim.overall_league_PTS}</th>
+                                            </tr>
+                                        )})
+                                    }
+                                </tbody>
+                            </table>
+                            <br></br>
+                            <br></br>
+                        </div>
+                    )
+                }
             </div>
         )
     }
